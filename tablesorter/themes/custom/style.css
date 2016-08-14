@@ -1,0 +1,169 @@
+/* tables */
+@import url(https://fonts.googleapis.com/css?family=Exo);
+* {
+	font-family: 'Exo', sans-serif !important;
+}
+@font-face {
+	font-family: 'Exo', sans-serif !important;
+}
+@media screen and (min-width: 641px) {
+.mobilesort {display:none !important;}
+span.thmobile {display:none;}
+table.tablesorter {
+	/*text-transform: uppercase;*/
+	font-family: 'Exo', sans-serif;
+	background-color: #CDCDCD;
+	margin:10px 0pt 15px;
+	font-size: 8pt;
+	width: 100%;
+	text-align: left;
+	/**/
+	margin: 1em 0;
+	min-width: 300px;
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+	background-color:  #01b8c6 !important;;
+	/*border: 1px solid #FFF;*/
+	font-size: 8pt;
+	padding: 4px;
+}
+table.tablesorter thead th {
+	min-width:68px !important;
+}
+
+
+table.tablesorter thead tr .header {
+	font-weight: 900 !important;
+	font-weight: bolder !important;
+	color:white;
+	background-image: url(bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+	min-height:20px !important;
+
+}
+table.tablesorter tbody td {
+	color: #3D3D3D;
+	font-weight: bold !importnt;
+	padding: 4px !important;
+	background-color: #FFF;
+	vertical-align: top;
+	display: table-cell;
+	font-family: 'Exo', sans-serif !important;
+
+}
+table.tablesorter tbody tr.odd td {
+	background-color:#f3f3f3;
+	font-family: 'Exo', sans-serif !important;
+
+}
+tr:hover td {
+	background-color:#01b8c6 !important;
+	font-weight:bolder !important;
+}
+
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+background-color: #8dbdd8;
+}
+}
+
+.content {
+	display: table-cell !important;
+	vertical-align: middle !important;
+	background:red !important;
+}
+
+/* ******* MOBILE ********/
+
+@media screen and (max-width: 640px) {
+.mobilesort {display:block !important;	}
+.mobilesort select {width:100% !important;}
+table {width:100%;}
+thead {display: none;}
+td:first-child {
+    background-color: #01b8c6 !important;
+		color: #fff !important;
+		font-weight:bold !important;
+
+}
+.tablesorter td {
+	/*text-transform: uppercase !important;*/
+}
+
+.tablesorter td:first-child:active {
+    background-color: #01b8c6 !important;
+}
+.tablesorter tr:active {
+		font-weight:bolder !important;
+}
+
+.tablesorter td:first-child:focus {
+    background-color: #01b8c6 !important;
+}
+.tablesorter tr:focus {
+		font-weight:bolder !important;
+}
+
+.tablesorter td:first-child:hover{
+    background-color: #01b8c6 !important;
+}
+
+.tablesorter tr:hover{
+		font-weight:bolder !important;
+}
+
+.tablesorter tr:nth-of-type(2n) {background-color:#f3f3f3;}
+/*tr td:first-child {background: #f0f0f0; font-weight:bold;font-size:1.3em;}*/
+.tablesorter tbody td {display: block;  text-align:center; font-size:0.75em; line-height:1.3em; border-bottom: 0px !important;}
+
+.tablesorter tbody td span {
+	font-weight: 900 !important;
+}
+
+.tablesorter tbody td:before {
+    content: attr(data-th);
+    display: block;
+    text-align:center;
+  }
+
+	.tablesorter tbody td:nth-child(2) {
+		border: 0px !important;
+			padding: 0px !important;
+			padding-top: 10px !important;
+			padding-bottom: 10px !important;
+		border-left: 1px solid rgba(0,0,0,0.08) !important;
+		border-collapse: collapse !important;
+		width:49.8% !important;
+		/*float:left !important;*/
+		display: inline-block !important;
+		text-align: right !important;
+	}
+	.tablesorter tbody td:nth-child(3) {
+			border: 0px !important;
+			padding: 0px !important;
+			padding-top: 10px !important;
+			padding-bottom: 10px !important;
+			border-right: 1px solid rgba(0,0,0,0.08) !important;
+			border-collapse: collapse !important;
+			width:48.8% !important;
+			margin-left:1px !important;
+	  	/*float:right; !important;*/
+			display: inline-block !important;
+			text-align: left !important;
+	}
+	.tablesorter tbody td:nth-child(2):after {
+		content: "\00a0 " !important;
+	}
+
+	.tablesorter tbody td:nth-child(4) {
+		clear: both !important;
+	}
+
+}
