@@ -15,7 +15,7 @@ error_reporting(E_ALL);
 
 function cats_renderTable () {
 	$file='prove_corrente_colonna_codici.xls';
-	$sheet_uri = ABSPATH . 'wp-content/plugins/tablesheet/'."prove_corrente_colonna_codici.xls";
+	$sheet_uri = ABSPATH . 'wp-content/plugins/tablesheet/'."aa_prove.xls";
 	$excelReader = new ExcelReader(); // Call Service
 
 	$excelReader->printSheet($sheet_uri);

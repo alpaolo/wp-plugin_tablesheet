@@ -15,7 +15,7 @@ class ExcelReader{
 
     public function printSheet($sheet_uri) {
       setlocale(LC_TIME, 'it_IT');
-      
+
 
 
 
@@ -36,7 +36,7 @@ class ExcelReader{
       if(file_exists($sheet_uri)){
         $objPHPExcel = PHPExcel_IOFactory::load($sheet_uri);
       }
-      else {echo "no file";}
+      else {echo "no file";return;}
 
       $objPHPExcel->setActiveSheetIndex(0);
       $objCalendarioSheet = $objPHPExcel->getActiveSheet();
@@ -68,17 +68,18 @@ class ExcelReader{
     	$td_class="td";
     	$span_class="span";
 
-      echo "<button onClick='showItems(\"ORCH\")'>Solo ORCH</button>";
-      echo "<button onClick='showItems(\"CMIS\")'>Solo CORO MISTO</button>";
-      echo "<button onClick='showItems(\"CFEM\")'>Solo CORO FEMMINILE</button>";
-      echo "<button onClick='showItems(\"CCAM\")'>Solo CCAM</button>";
-      echo "<button onClick='showAllItems()'>Tutti</button>";
+      echo "<button onClick='showItem(\"ORCH\")'>Solo ORCHESTRA</button>";
+      echo "<button onClick='showItem(\"CMIS\")'>Solo CORO MISTO</button>";
+      echo "<button onClick='showItem(\"CFEM\")'>Solo CORO FEMMINILE</button>";
+      echo "<button onClick='showItem(\"CCAM\")'>Solo CORO DA CAMERA</button>";
+      echo "<button onClick='showItems([\"CCAM\",\"CMIS\",\"CFEM\",\"CORI\"])'>Solo CORI</button>";
+      echo "<button onClick='showAllItems()'>RIPRISTINA TABELLA</button>";
 
       echo "<table id='".$table_id."' class='".$table_class."'  data-tablesaw-mode='stack'>";
       echo "<thead>";
         echo "<tr>";
         for($c=0; $c<$calendarioCols; $c++) {
-          if($c !== 355 /* esclude il campo nascosto nella testata */) {
+          if($c !== 5 /* esclude il campo nascosto nella testata */) {
             $cellValue=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow($c,1)->getValue();
             echo "<th class='".$th_class."'>".$cellValue."</th>";
           }
@@ -92,17 +93,17 @@ class ExcelReader{
         }
         else {$tr_class="even";}
         // Give the "organico" as class for select mode
-        echo "<tr class='".$tr_class." ".$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(5,$r)->getValue()."'>";
+        echo "<tr VALIGN='middle' class='".$tr_class." ".$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(5,$r)->getValue()."'>";
 
         for($c=0; $c<$calendarioCols; $c++) {
-          if($c !== 355 /* esclude il campo nascosto */) {
+          if($c !== 5 /* esclude il campo nascosto */) {
             $cell=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow($c,$r);
             $cellValue=$cell->getFormattedValue();
             if($c==0) {
               $unixTimeStamp = PHPExcel_Shared_Date::ExcelToPHP($cell->getValue());
-              $cellValue = strftime("%a %d %b %Y", $unixTimeStamp);
+              $cellValue = strftime("%a", $unixTimeStamp)."<br/>".strftime("%d %b %Y", $unixTimeStamp);
             }
-            echo "<td class='".$td_class."'>".$cellValue."</td>";
+            echo "<td VALIGN='middle' class='".$td_class."'>".$cellValue."</td>";
           }
         }
         echo "</tr>";
@@ -129,7 +130,7 @@ class ExcelReader{
           $cellValue=$cell->getFormattedValue();
           if($c==0 && $r!=1) {
             $unixTimeStamp = PHPExcel_Shared_Date::ExcelToPHP($cell->getValue());
-            $cellValue = strftime("%a %d %b %Y", $unixTimeStamp);
+            $cellValue = strftime("%a %n %d %b %Y", $unixTimeStamp);
           }
           array_push($rowArray,$cellValue);
         }
