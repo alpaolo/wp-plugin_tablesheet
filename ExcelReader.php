@@ -43,23 +43,54 @@ class ExcelReader{
       $calendarioRows = $objCalendarioSheet->getHighestRow();
       $calendarioCols = PHPExcel_Cell::columnIndexFromString($objCalendarioSheet->getHighestColumn());
       $objPHPExcel->setActiveSheetIndex(1);
-      $objLuogoSheet = $objPHPExcel->getActiveSheet();
-      $luogoRows = $objLuogoSheet->getHighestRow();
-      $luogoRowsCols = PHPExcel_Cell::columnIndexFromString($objLuogoSheet->getHighestColumn());
-      $objPHPExcel->setActiveSheetIndex(1);
+      $objSalaSheet = $objPHPExcel->getActiveSheet();
+      $salaRows = $objSalaSheet->getHighestRow();
+      $salaCols = PHPExcel_Cell::columnIndexFromString($objSalaSheet->getHighestColumn());
+      $salaJson="{";
+      for ($r=1; $r<$salaRows; $r++){
+        $key=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(0,$r)->getValue();
+        $value=str_replace(","," ",$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(1,$r)->getValue());
+        $value=str_replace(":"," ",$value);
+        $value=str_replace("'"," ",$value);
+        $salaJson=$salaJson."\"".$key."\":\"".$value."\",";
+      }
+      $salaJson=$salaJson."}";
+
       $objPHPExcel->setActiveSheetIndex(2);
       $objDirettoriSheet = $objPHPExcel->getActiveSheet();
       $direttoriRows = $objDirettoriSheet->getHighestRow();
       $direttoriCols = PHPExcel_Cell::columnIndexFromString($objDirettoriSheet->getHighestColumn());
-      $objPHPExcel->setActiveSheetIndex(1);
+      $direttoriJson="{";
+      for ($r=1; $r<$direttoriRows; $r++){
+        $key=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(0,$r)->getValue();
+        $value=str_replace(","," ",$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(1,$r)->getValue());
+        $value=str_replace(":"," ",$value);
+        $value=str_replace("'"," ",$value);
+        $direttoriJson=$direttoriJson."\"".$key."\":\"".$value."\",";
+      }
+      $direttoriJson=$direttoriJson."}";
+
       $objPHPExcel->setActiveSheetIndex(3);
       $objAppuntamentiSheet = $objPHPExcel->getActiveSheet();
       $appuntamentiRows = $objAppuntamentiSheet->getHighestRow();
       $appuntamentiCols = PHPExcel_Cell::columnIndexFromString($objAppuntamentiSheet->getHighestColumn());
-      $objPHPExcel->setActiveSheetIndex(1);
+      $appuntamentiJson="{";
+      for ($r=1; $r<$direttoriRows; $r++){
+        $key=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(0,$r)->getValue();
+        $value=str_replace(","," ",$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(1,$r)->getValue());
+        $value=str_replace(":"," ",$value);
+        $value=str_replace("'"," ",$value);
+        $appuntamentiJson=$appuntamentiJson."\"".$key."\":\"".$value."\",";
+      }
+      $appuntamentiJson=$appuntamentiJson."}";
+
+
       //echo $appuntamenti->numRows."<br/>";
       //echo $appuntamenti->numCols."<br/>";
       $objPHPExcel->setActiveSheetIndex(0);
+
+
+
 
 
       $table_id="tablesorter-demo";
@@ -93,17 +124,33 @@ class ExcelReader{
         }
         else {$tr_class="even";}
         // Give the "organico" as class for select mode
-        echo "<tr VALIGN='middle' class='".$tr_class." ".$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(5,$r)->getValue()."'>";
 
+        $cellValueArray=[];
+        // Fill the array for using on js parameters function call
         for($c=0; $c<$calendarioCols; $c++) {
-          if($c !== 5 /* esclude il campo nascosto */) {
             $cell=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow($c,$r);
             $cellValue=$cell->getFormattedValue();
             if($c==0) {
               $unixTimeStamp = PHPExcel_Shared_Date::ExcelToPHP($cell->getValue());
               $cellValue = strftime("%a", $unixTimeStamp)."<br/>".strftime("%d %b %Y", $unixTimeStamp);
             }
-            echo "<td VALIGN='middle' class='".$td_class."'>".$cellValue."</td>";
+            array_push($cellValueArray,$cellValue);
+        }
+        $tableJson="{";
+        for ($i=0; $i<count($cellValueArray); $i++){
+          $tableJson=$tableJson."'".$i."','".$cellValueArray[$i]."',";
+        }
+        $tableJson=$tableJson."}";
+        $pippo="ciao";
+
+        echo "<tr onClick='showDetails(";
+        echo $salaJson.",".$direttoriJson.",".$appuntamentiJson;
+        echo ")' VALIGN='middle' class='cliccable ".$tr_class." ".$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(5,$r)->getValue()."'>";
+
+        for($c=0; $c<$calendarioCols; $c++) {
+          if($c !== 5 /* esclude il campo nascosto */) {
+
+            echo "<td VALIGN='middle' class='".$td_class."'>".$cellValueArray[$c]."</td>";
           }
         }
         echo "</tr>";

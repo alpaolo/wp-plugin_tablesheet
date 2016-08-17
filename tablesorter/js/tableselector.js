@@ -49,3 +49,15 @@ var showAllItems = function () {
     jQuery(this).css('display','table-row');
   });
 };
+
+var showDetails = function (salaObj,direttoriObj,appuntamentiObj) {
+  console.log(JSON.stringify(salaObj));
+  console.log(JSON.stringify(direttoriObj));
+  console.log(JSON.stringify(appuntamentiObj));
+  var w = 600;
+  var h = 400;
+  var l = Math.floor((screen.width-w)/2);
+  var t = Math.floor((screen.height-h)/2);
+
+ window.open("","","width=" + w + ",height=" + h + ",top=" + t + ",left=" + l);
+};
