@@ -46,58 +46,58 @@ class ExcelReader{
       $objSalaSheet = $objPHPExcel->getActiveSheet();
       $salaRows = $objSalaSheet->getHighestRow();
       $salaCols = PHPExcel_Cell::columnIndexFromString($objSalaSheet->getHighestColumn());
-      $salaJson="{";
+      $salaObjString="{";
       for ($r=1; $r<$salaRows; $r++){
         $key=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(0,$r)->getValue();
         $value=str_replace(","," ",$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(1,$r)->getValue());
         $value=str_replace(":"," ",$value);
         $value=str_replace("'"," ",$value);
-        $salaJson=$salaJson."\"".$key."\":\"".$value."\",";
+        $salaObjString=$salaObjString."\"".$key."\":\"".$value."\",";
       }
-      $salaJson=$salaJson."}";
+      $salaObjString=$salaObjString."}";
 
       $objPHPExcel->setActiveSheetIndex(2);
       $objDirettoriSheet = $objPHPExcel->getActiveSheet();
       $direttoriRows = $objDirettoriSheet->getHighestRow();
       $direttoriCols = PHPExcel_Cell::columnIndexFromString($objDirettoriSheet->getHighestColumn());
-      $direttoriJson="{";
+      $direttoriObjString="{";
       for ($r=1; $r<$direttoriRows; $r++){
         $key=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(0,$r)->getValue();
         $value=str_replace(","," ",$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(1,$r)->getValue());
         $value=str_replace(":"," ",$value);
         $value=str_replace("'"," ",$value);
-        $direttoriJson=$direttoriJson."\"".$key."\":\"".$value."\",";
+        $direttoriObjString=$direttoriObjString."\"".$key."\":\"".$value."\",";
       }
-      $direttoriJson=$direttoriJson."}";
+      $direttoriObjString=$direttoriObjString."}";
 
       $objPHPExcel->setActiveSheetIndex(3);
       $objAppuntamentiSheet = $objPHPExcel->getActiveSheet();
       $appuntamentiRows = $objAppuntamentiSheet->getHighestRow();
       $appuntamentiCols = PHPExcel_Cell::columnIndexFromString($objAppuntamentiSheet->getHighestColumn());
-      $appuntamentiJson="{";
+      $tipoAppuntamentiObjString="{";
       for ($r=1; $r<$direttoriRows; $r++){
         $key=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(0,$r)->getValue();
         $value=str_replace(","," ",$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(1,$r)->getValue());
         $value=str_replace(":"," ",$value);
         $value=str_replace("'"," ",$value);
-        $appuntamentiJson=$appuntamentiJson."\"".$key."\":\"".$value."\",";
+        $tipoAppuntamentiObjString=$tipoAppuntamentiObjString."\"".$key."\":\"".$value."\",";
       }
-      $appuntamentiJson=$appuntamentiJson."}";
+      $tipoAppuntamentiObjString=$tipoAppuntamentiObjString."}";
 
 
       //echo $appuntamenti->numRows."<br/>";
       //echo $appuntamenti->numCols."<br/>";
       $objPHPExcel->setActiveSheetIndex(0);
 
-
-
-
-
       $table_id="tablesorter-demo";
     	$table_class="tablesorter tablesaw tablesaw-stack";
     	$th_class="header";
     	$td_class="td";
     	$span_class="span";
+      $popupUrl=get_bloginfo($show = 'wpurl');
+
+      // Create popup in windows
+      echo "<div class='popUp' style='position.absolute;z-index:100;min-width:400px;min-height:400px;background:white;display:none'></div>";
 
       echo "<button onClick='showItem(\"ORCH\")'>Solo ORCHESTRA</button>";
       echo "<button onClick='showItem(\"CMIS\")'>Solo CORO MISTO</button>";
@@ -136,15 +136,21 @@ class ExcelReader{
             }
             array_push($cellValueArray,$cellValue);
         }
-        $tableJson="{";
+        $tableObjString="{";
         for ($i=0; $i<count($cellValueArray); $i++){
-          $tableJson=$tableJson."'".$i."','".$cellValueArray[$i]."',";
+          $tempValue=str_replace(","," ",$cellValueArray[$i]);
+          $tempValue=str_replace(":"," - ",$tempValue);
+          $tempValue=str_replace("<br/>"," ",$tempValue);
+          $tempValue=str_replace("'","&apos;",$tempValue);
+
+          $tableObjString=$tableObjString."\"".$i."\":\"".$tempValue."\",";
         }
-        $tableJson=$tableJson."}";
-        $pippo="ciao";
+        $tableObjString=$tableObjString."}";
+
+        //$popupUrl=plugins_url( '/dettagliconvocazione.html', __FILE__ );
 
         echo "<tr onClick='showDetails(";
-        echo $salaJson.",".$direttoriJson.",".$appuntamentiJson;
+        echo $tableObjString.",".$salaObjString.",".$direttoriObjString.",".$tipoAppuntamentiObjString.",\"".$popupUrl."\"" ;
         echo ")' VALIGN='middle' class='cliccable ".$tr_class." ".$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(5,$r)->getValue()."'>";
 
         for($c=0; $c<$calendarioCols; $c++) {

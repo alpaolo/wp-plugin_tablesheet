@@ -72,6 +72,15 @@ table.tablesorter thead tr .headerSortDown {
 table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
 background-color: #8dbdd8;
 }
+/* POP UP */
+.popUp{
+	position:absolute;
+}
+
+.popUpItem{
+	border: 1px solid black;
+}
+
 }
 
 .content {
