@@ -49,9 +49,9 @@ class ExcelReader{
       $salaObjString="{";
       for ($r=1; $r<$salaRows; $r++){
         $key=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(0,$r)->getValue();
-        $value=str_replace(","," ",$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(1,$r)->getValue());
-        $value=str_replace(":"," ",$value);
-        $value=str_replace("'"," ",$value);
+        $value=str_replace(",","&comma;",$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(1,$r)->getValue());
+        $value=str_replace(":","&colon;",$value);
+        $value=str_replace("'","&apos;",$value);
         $salaObjString=$salaObjString."\"".$key."\":\"".$value."\",";
       }
       $salaObjString=$salaObjString."}";
@@ -63,9 +63,9 @@ class ExcelReader{
       $direttoriObjString="{";
       for ($r=1; $r<$direttoriRows; $r++){
         $key=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(0,$r)->getValue();
-        $value=str_replace(","," ",$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(1,$r)->getValue());
-        $value=str_replace(":"," ",$value);
-        $value=str_replace("'"," ",$value);
+        $value=str_replace(",","&comma;",$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(1,$r)->getValue());
+        $value=str_replace(":","&colon;",$value);
+        $value=str_replace("'","&apos;",$value);
         $direttoriObjString=$direttoriObjString."\"".$key."\":\"".$value."\",";
       }
       $direttoriObjString=$direttoriObjString."}";
@@ -77,9 +77,9 @@ class ExcelReader{
       $tipoAppuntamentiObjString="{";
       for ($r=1; $r<$direttoriRows; $r++){
         $key=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(0,$r)->getValue();
-        $value=str_replace(","," ",$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(1,$r)->getValue());
-        $value=str_replace(":"," ",$value);
-        $value=str_replace("'"," ",$value);
+        $value=str_replace(",","&comma;",$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(1,$r)->getValue());
+        $value=str_replace(":","&colon;",$value);
+        $value=str_replace("'","&apos;",$value);
         $tipoAppuntamentiObjString=$tipoAppuntamentiObjString."\"".$key."\":\"".$value."\",";
       }
       $tipoAppuntamentiObjString=$tipoAppuntamentiObjString."}";
@@ -97,7 +97,7 @@ class ExcelReader{
       $popupUrl=get_bloginfo($show = 'wpurl');
 
       // Create popup in windows
-      echo "<div class='popUp' style='position.absolute;z-index:100;min-width:400px;min-height:400px;background:white;display:none'></div>";
+      //echo '<div id="myModal" class="modal"><!-- Modal content --><div class="modal-content"><span class="close">×</span><div class="popup-content"></div></div></div>';
 
       echo "<button onClick='showItem(\"ORCH\")'>Solo ORCHESTRA</button>";
       echo "<button onClick='showItem(\"CMIS\")'>Solo CORO MISTO</button>";
@@ -138,8 +138,8 @@ class ExcelReader{
         }
         $tableObjString="{";
         for ($i=0; $i<count($cellValueArray); $i++){
-          $tempValue=str_replace(","," ",$cellValueArray[$i]);
-          $tempValue=str_replace(":"," - ",$tempValue);
+          $tempValue=str_replace(",","&comma;",$cellValueArray[$i]);
+          $tempValue=str_replace(":","&colon;",$tempValue);
           $tempValue=str_replace("<br/>"," ",$tempValue);
           $tempValue=str_replace("'","&apos;",$tempValue);
 

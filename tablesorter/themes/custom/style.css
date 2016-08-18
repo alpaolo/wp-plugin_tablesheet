@@ -73,6 +73,52 @@ table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSo
 background-color: #8dbdd8;
 }
 /* POP UP */
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 80%; /* Full width */
+    height: 80%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.popup-content{z-index:1000 !important;display:block !important; float:left !important;}
+.popUpItem{z-index:1000 !important; float:left !important; font-family: 'Exo', sans-serif !important; margin-top:5px;margin-bottom:5px;max-width:90%;width:90%;margin-left:5%;}
+.popUpItem span{float:left !important;}
+.popUpThead{z-index:1000 !important;display:inline !important; color:white !important;min-width:20% !important; font-weight:bold !important;background-color: #01b8c6 !important;}
+.value{z-index:1000 !important;padding-left:5px;display:inline !important; }
+}
+
 .popUp{
 	position:absolute;
 }
@@ -81,13 +127,7 @@ background-color: #8dbdd8;
 	border: 1px solid black;
 }
 
-}
 
-.content {
-	display: table-cell !important;
-	vertical-align: middle !important;
-	background:red !important;
-}
 
 /* ******* MOBILE ********/
 
