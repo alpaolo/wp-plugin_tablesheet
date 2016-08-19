@@ -122,28 +122,38 @@ var showDetails = function (tableObj, saleObj,insegnantiObj,tipoObj,url) {
   var contentEl = document.getElementsByClassName("ca-popup-content")[0];
   contentEl.innerHTML=content;
 
+  var tableEl = document.getElementById("tablesorter-demo");
+  var refEl = document.getElementsByClassName("mcb-section-inner")[0];
 
-  var W = document.body.clientWidth;
+  var refElW = refEl.offsetWidth;
+  var tableElW = tableEl.offsetWidth;
+  var W = document.body.offsetWidth;
   var H = screen.height;
   console.log("Width: "+H);
-  var w=W/2;
+  var w=tableElW;
   var h=H/2;
   var l = Math.floor((W-w)/2);
   var t = Math.floor((H-h)/2);
 
+  console.log(tableElW);
+
   var modal = document.getElementById('ca-myModal');
   modal.style.display = "table";
+  modal.style.top = t+"px";
+  modal.style.left = l+"px";
+  modal.style.width = (w-42)+"px";// subtract padding
   var modalContent = document.getElementsByClassName('ca-modal-content')[0];
   modalContent.style.display = "table";
   modalContent.style.top = t+"px";
   modalContent.style.left = l+"px";
-  modalContent.style.width = w+"px";
+  modalContent.style.width = (w)+"px";// subtract padding
   //modalContent.style.height = h+"px";
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("ca-close")[0];
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
       modalContent.style.display = "none";
+      modal.style.display = "none";
   }
 
   var contentEl = document.getElementsByClassName("ca-popup-content")[0];
