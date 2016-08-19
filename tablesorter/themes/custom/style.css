@@ -7,6 +7,10 @@
 	font-family: 'Exo', sans-serif !important;
 }
 @media screen and (min-width: 641px) {
+
+.ca-btnCnt {float:left;}
+.ca-btn {float: left;display:inline;}
+
 .mobilesort {display:none !important;}
 span.thmobile {display:none;}
 table.tablesorter {
@@ -75,55 +79,64 @@ background-color: #8dbdd8;
 /* POP UP */
 
 
-.modal {
+.ca-modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
-    width: 80%; /* Full width */
-    height: 80%; /* Full height */
+    /*width: 80%; /* Full width */
+    /*height: 80%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgba(0,0,0,1); /* Black w/ opacity */
+		height: auto;
 }
 
 /* Modal Content */
-.modal-content {
+.ca-modal-content {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+    z-index: 10000; /* Sit on top */
+		left: 0;
+		top: 0;
     background-color: #fefefe;
+		display:block;
+		overflow: auto; /* Enable scroll if needed */
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+
 }
 
 /* The Close Button */
-.close {
+.ca-close {
     color: #aaaaaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.ca-close:hover,
+.ca-close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
 }
-.popup-content{z-index:1000 !important;display:block !important; float:left !important;}
-.popUpItem{z-index:1000 !important; float:left !important; font-family: 'Exo', sans-serif !important; margin-top:5px;margin-bottom:5px;max-width:90%;width:90%;margin-left:5%;}
-.popUpItem span{float:left !important;}
-.popUpThead{z-index:1000 !important;display:inline !important; color:white !important;min-width:20% !important; font-weight:bold !important;background-color: #01b8c6 !important;}
-.value{z-index:1000 !important;padding-left:5px;display:inline !important; }
+.ca-popup-content{display:block !important;overflow:auto;font-size: 70%;}
+.ca-popUpItem{float:left !important; font-family: 'Exo', sans-serif !important; margin-top:5px;margin-bottom:5px;max-width:90%;width:90%;margin-left:5%;}
+.ca-popUpItem span{float:left !important;}
+.ca-popUpThead{display:inline !important; color:white !important;min-width:20% !important; font-weight:bold !important;background-color: #01b8c6 !important;}
+.ca-value{padding-left:5px;display:inline !important; }
 }
 
-.popUp{
+.ca-popUp{
 	position:absolute;
 }
 
-.popUpItem{
+.ca-popUpItem{
 	border: 1px solid black;
 }
 

@@ -98,14 +98,15 @@ class ExcelReader{
 
       // Create popup in windows
       //echo '<div id="myModal" class="modal"><!-- Modal content --><div class="modal-content"><span class="close">×</span><div class="popup-content"></div></div></div>';
-
-      echo "<button onClick='showItem(\"ORCH\")'>Solo ORCHESTRA</button>";
-      echo "<button onClick='showItem(\"CMIS\")'>Solo CORO MISTO</button>";
-      echo "<button onClick='showItem(\"CFEM\")'>Solo CORO FEMMINILE</button>";
-      echo "<button onClick='showItem(\"CCAM\")'>Solo CORO DA CAMERA</button>";
-      echo "<button onClick='showItems([\"CCAM\",\"CMIS\",\"CFEM\",\"CORI\"])'>Solo CORI</button>";
-      echo "<button onClick='showAllItems()'>RIPRISTINA TABELLA</button>";
-
+      the_content();
+      echo "<div class='ca-btnCnt'>";
+      echo "<button class='ca-btn' onClick='showItem(\"ORCH\")'>Solo ORCHESTRA</button>";
+      echo "<button class='ca-btn'onClick='showItem(\"CMIS\")'>Solo CORO MISTO</button>";
+      echo "<button class='ca-btn'onClick='showItem(\"CFEM\")'>Solo CORO FEMMINILE</button>";
+      echo "<button class='ca-btn'onClick='showItem(\"CCAM\")'>Solo CORO DA CAMERA</button>";
+      echo "<button class='ca-btn'onClick='showItems([\"CCAM\",\"CMIS\",\"CFEM\",\"CORI\"])'>Solo CORI</button>";
+      echo "<button class='ca-btn'onClick='showAllItems()'>RIPRISTINA TABELLA</button>";
+      echo "</div>";
       echo "<table id='".$table_id."' class='".$table_class."'  data-tablesaw-mode='stack'>";
       echo "<thead>";
         echo "<tr>";

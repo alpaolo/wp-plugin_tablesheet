@@ -107,17 +107,21 @@ var showDetails = function (tableObj, saleObj,insegnantiObj,tipoObj,url) {
 
 
 
-  var content = "<div id='data'class='popUpItem'><span class='popUpThead'>Data: </span><span class='value'>"+tableObj["0"]+"</span></div>";
-  content+="<div id='dalle' class='popUpItem'><span class='popUpThead'>Dalle: </span><span class='value'>"+tableObj["1"]+"</span></div>";
-  content+="<div id='alle' class='popUpItem'><span class='popUpThead'>Alle: </span><span class='value'>"+tableObj["2"]+"</span></div>";
-  content+="<div id='sala' class='popUpItem'><span class='popUpThead'>Sala: </span><span class='value'>"+salaValue+"</span></div>";
-  content+="<div id='tipo' class='popUpItem'><span class='popUpThead'>Tipo: </span><span class='value'>"+tipoValue+"</span></div>";
-  content+="<div id='organico' class='popUpItem'><span class='popUpThead'>Organico: </span><span class='value'>"+organicoValue+"</span></div>";
-  content+="<div id='programma' class='popUpItem'><span class='popUpThead'>Programma: </span><span class='value'>"+tableObj["7"]+"</span></div>";
-  content+="<div id='insegnanti' class='popUpItem'><span class='popUpThead'>Insegnanti: </span><span class='value'>"+insegnanteValue+"</span></div>";
+  var content = "<div id='data'class='ca-popUpItem'><span class='ca-popUpThead'>Data: </span><span class='ca-value'>"+tableObj["0"]+"</span></div>";
+  content+="<div id='dalle' class='ca-popUpItem'><span class='ca-popUpThead'>Dalle: </span><span class='ca-value'>"+tableObj["1"]+"</span></div>";
+  content+="<div id='alle' class='ca-popUpItem'><span class='ca-popUpThead'>Alle: </span><span class='ca-value'>"+tableObj["2"]+"</span></div>";
+  content+="<div id='sala' class='ca-popUpItem'><span class='ca-popUpThead'>Sala: </span><span class='ca-value'>"+salaValue+"</span></div>";
+  content+="<div id='tipo' class='ca-popUpItem'><span class='ca-popUpThead'>Tipo: </span><span class='ca-value'>"+tipoValue+"</span></div>";
+  content+="<div id='organico' class='ca-popUpItem'><span class='ca-popUpThead'>Organico: </span><span class='ca-value'>"+organicoValue+"</span></div>";
+  content+="<div id='programma' class='ca-popUpItem'><span class='ca-popUpThead'>Programma: </span><span class='ca-value'>"+tableObj["7"]+"</span></div>";
+  content+="<div id='insegnanti' class='ca-popUpItem'><span class='ca-popUpThead'>Insegnanti: </span><span class='ca-value'>"+insegnanteValue+"</span></div>";
   //var popUp = window.open(url+"/dettagli_convocazione.html","Dettagli convocazione","width=" + w + ",height=" + h + ",top=" + t + ",left=" + l+",location=no,titlebar=no,status=no");
 
   var containerEl = document.getElementsByClassName("column_attr")[0];
+
+  var contentEl = document.getElementsByClassName("ca-popup-content")[0];
+  contentEl.innerHTML=content;
+
 
   var W = document.body.clientWidth;
   var H = screen.height;
@@ -125,27 +129,29 @@ var showDetails = function (tableObj, saleObj,insegnantiObj,tipoObj,url) {
   var w=W/2;
   var h=H/2;
   var l = Math.floor((W-w)/2);
-  var t = Math.floor((H-h)/4);
+  var t = Math.floor((H-h)/2);
 
-  var modal = document.getElementById('myModal');
-  modal.style.display = "block";
-  modal.style.top = t+"px";
-  modal.style.left = l+"px";
-  modal.style.width = w+"px";
-  modal.style.height = h+"px";
+  var modal = document.getElementById('ca-myModal');
+  modal.style.display = "table";
+  var modalContent = document.getElementsByClassName('ca-modal-content')[0];
+  modalContent.style.display = "table";
+  modalContent.style.top = t+"px";
+  modalContent.style.left = l+"px";
+  modalContent.style.width = w+"px";
+  //modalContent.style.height = h+"px";
   // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
+  var span = document.getElementsByClassName("ca-close")[0];
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
-      modal.style.display = "none";
+      modalContent.style.display = "none";
   }
 
-  var contentEl = document.getElementsByClassName("popup-content")[0];
+  var contentEl = document.getElementsByClassName("ca-popup-content")[0];
   contentEl.innerHTML=content;
 
 
   // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
+  var span = document.getElementsByClassName("ca-close")[0];
 
 
 
